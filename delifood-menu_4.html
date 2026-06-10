@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delifood CR – Menú</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#CC1111;--red-light:#FEE2E2;--red-mid:#EF4444;
+  --gold:#B45309;--gold2:#F5C842;--gold3:#FFFBEB;--gold4:#FDE68A;
+  --cream:#1A0000;--paper:#2A0505;--dark:#CC1111;--ink:#F8F0E8;
+  --muted:#C8A090;--soft:#E8C090;--border:#5A1010;--border2:#8A1818;
+  --r:14px;
+}
+html{scroll-behavior:smooth}
+body{background:#1A0000;font-family:'Inter',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+
+/* ─── HERO ─── */
+.hero{
+  background:linear-gradient(160deg,#CC0000 0%,#991100 60%,#770000 100%);
+  min-height:340px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:64px 24px 52px;position:relative;overflow:hidden;
+  border-bottom:4px solid var(--gold2);
+}
+.hero-glow{
+  position:absolute;top:-60px;left:50%;transform:translateX(-50%);
+  width:600px;height:300px;
+  background:radial-gradient(ellipse,rgba(185,28,28,0.5) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-dots{
+  position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,0.04) 1px,transparent 1px);
+  background-size:28px 28px;pointer-events:none;
+}
+.hero-eyebrow{
+  font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold2);margin-bottom:18px;position:relative;
+}
+.hero-logo{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3.2rem,9vw,6rem);font-weight:900;
+  color:#fff;line-height:.95;letter-spacing:-2px;margin-bottom:10px;position:relative;
+}
+.hero-logo em{color:var(--gold2);font-style:normal}
+.hero-tagline{
+  font-size:13px;color:var(--soft);letter-spacing:2px;font-style:italic;
+  margin-bottom:28px;position:relative;
+}
+.hero-pills{
+  display:flex;gap:12px;flex-wrap:wrap;justify-content:center;position:relative;
+}
+.hero-pill{
+  background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
+  border-radius:50px;padding:7px 18px;font-size:12px;font-weight:500;color:#E7E5E4;
+  display:flex;align-items:center;gap:7px;
+}
+.hero-pill b{color:var(--gold2)}
+
+/* ─── STICKY NAV ─── */
+nav{
+  background:rgba(150,0,0,0.97);backdrop-filter:blur(12px);
+  border-bottom:2px solid var(--gold2);
+  position:sticky;top:0;z-index:100;
+}
+.nav-wrap{
+  max-width:1140px;margin:0 auto;padding:0 24px;
+  display:flex;gap:0;overflow-x:auto;scrollbar-width:none;
+}
+.nav-wrap::-webkit-scrollbar{display:none}
+.ntab{
+  padding:15px 18px;font-size:13px;font-weight:600;color:#FFD0B0;
+  white-space:nowrap;border:none;background:none;
+  border-bottom:2.5px solid transparent;cursor:pointer;
+  font-family:'Inter',sans-serif;transition:color .15s,border-color .15s;
+  display:flex;align-items:center;gap:6px;
+}
+.ntab:hover{color:var(--gold2)}
+.ntab.on{color:var(--gold2);border-bottom-color:var(--gold2)}
+.ntab-icon{font-size:15px}
+
+/* ─── MAIN ─── */
+main{max-width:1140px;margin:0 auto;padding:52px 24px 80px}
+.sec{margin-bottom:64px}
+.sec.hidden{display:none}
+
+/* ─── SECTION HEADER ─── */
+.sec-head{
+  display:grid;grid-template-columns:auto 1fr auto;
+  align-items:center;gap:16px;margin-bottom:28px;
+}
+.sec-badge{
+  background:#5A0000;color:var(--gold2);
+  border:1px solid #880000;
+  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  padding:6px 14px;border-radius:50px;white-space:nowrap;
+}
+.sec-rule{height:1px;background:var(--border)}
+.sec-count{
+  font-size:12px;color:var(--soft);white-space:nowrap;
+}
+.sec-title{
+  font-family:'Playfair Display',serif;
+  font-size:2rem;font-weight:700;color:var(--gold2);
+  margin-bottom:4px;line-height:1;
+  text-shadow:1px 1px 4px rgba(0,0,0,0.5);
+}
+.sec-sub{font-size:13px;color:var(--muted);margin-bottom:20px}
+
+/* ─── FEATURED CARD ─── */
+.featured-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;
+}
+.card-feat{
+  background:#3A0505;border:1px solid #6A1010;border-radius:var(--r);
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  min-height:200px;position:relative;
+  transition:transform .2s;
+}
+.card-feat:hover{transform:translateY(-3px)}
+.card-feat-photo{
+  width:100%;height:140px;
+  background:#4A0808;
+  border-bottom:1px solid #6A1010;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:5px;color:#AA5555;font-size:11px;font-weight:500;
+  cursor:pointer;transition:background .2s,color .2s;position:relative;
+}
+.card-feat-photo:hover{background:#5A0A0A;color:var(--gold2)}
+.card-feat-photo-icon{font-size:30px;opacity:.6}
+.card-feat-photo-id{position:absolute;bottom:4px;right:6px;font-size:9px;opacity:.3;font-family:monospace}
+.card-feat-body{padding:16px 18px 14px;flex:1;display:flex;flex-direction:column;justify-content:flex-end}
+.card-feat-badge{
+  display:inline-block;margin-bottom:8px;
+  background:var(--red-mid);color:#fff;
+  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  padding:3px 10px;border-radius:50px;align-self:flex-start;
+}
+.card-feat-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:3px;
+}
+.card-feat-sub{font-size:11px;color:var(--soft);margin-bottom:10px}
+.card-feat-price{
+  font-size:1.4rem;font-weight:700;color:var(--gold2);
+  font-variant-numeric:tabular-nums;
+}
+
+/* ─── STANDARD GRID ─── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+
+/* ─── STANDARD CARD ─── */
+.card{
+  background:#2A0505;border:1px solid #5A1010;
+  border-radius:var(--r);overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+  position:relative;
+}
+.card:hover{
+  border-color:#AA2020;transform:translateY(-3px);
+  box-shadow:0 8px 28px rgba(180,0,0,0.3);
+}
+.card-accent{
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--red),var(--gold2));
+  opacity:0;transition:opacity .2s;
+}
+.card:hover .card-accent{opacity:1}
+
+/* ─── FOTO SLOT en tarjeta ─── */
+.card-photo{
+  width:100%;aspect-ratio:4/3;
+  background:#3D0808;
+  border-bottom:1px solid #5A1010;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:5px;color:#994444;font-size:11px;font-weight:500;
+  cursor:pointer;transition:background .2s,color .2s;
+  position:relative;overflow:hidden;
+}
+.card-photo:hover{background:#4D0A0A;color:var(--gold2)}
+.card-photo-icon{font-size:28px;opacity:.6}
+.card-photo-hint{font-size:10px;opacity:.5;text-align:center;padding:0 8px}
+
+/* ID visible para encontrar fácil */
+.card-photo-id{
+  position:absolute;bottom:4px;right:6px;
+  font-size:9px;opacity:.35;font-family:monospace;
+}
+
+.card-body{padding:14px 14px 12px}
+.card-name{
+  font-weight:700;font-size:13px;color:var(--ink);
+  line-height:1.35;margin-bottom:3px;
+}
+.card-sub{font-size:11px;color:var(--muted);line-height:1.4;margin-bottom:10px;min-height:14px}
+.card-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:10px;
+  border-top:1px solid #5A1010;}
+.card-price{
+  font-size:1.05rem;font-weight:700;color:var(--gold2);
+  font-variant-numeric:tabular-nums;
+}
+.card-label{
+  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:3px 9px;border-radius:50px;
+}
+.label-fam{background:#3A1800;color:#F59E0B}
+.label-pop{background:#3A0808;color:#F87171}
+.label-nuevo{background:#0A1A2A;color:#60A5FA}
+
+/* ─── COMBO CARD (vertical con foto) ─── */
+.combo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.combo-card{
+  background:#2A0505;border:1px solid #5A1010;
+  border-radius:var(--r);overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:border-color .2s,box-shadow .2s,transform .2s;
+}
+.combo-card:hover{
+  border-color:#AA2020;
+  box-shadow:0 4px 18px rgba(180,0,0,0.25);
+  transform:translateY(-3px);
+}
+.combo-photo{
+  width:100%;aspect-ratio:4/3;
+  background:#3D0808;border-bottom:1px solid #5A1010;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:5px;color:#994444;font-size:11px;font-weight:500;
+  cursor:pointer;transition:background .2s,color .2s;position:relative;
+}
+.combo-photo:hover{background:#4D0A0A;color:var(--gold2)}
+.combo-photo-icon{font-size:26px;opacity:.6}
+.combo-photo-id{position:absolute;bottom:4px;right:6px;font-size:9px;opacity:.3;font-family:monospace}
+.combo-body{flex:1;padding:12px 14px;display:flex;flex-direction:column;gap:3px}
+.combo-name{font-size:13px;font-weight:700;color:var(--ink)}
+.combo-inc{font-size:11px;color:var(--muted)}
+.combo-price{
+  font-size:1.05rem;font-weight:700;color:var(--gold2);
+  white-space:nowrap;font-variant-numeric:tabular-nums;margin-top:6px;
+}
+
+/* ─── ACOMP GRID ─── */
+.acomp-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:10px;
+}
+.acomp-card{
+  background:#2A0505;border:1px solid #5A1010;
+  border-radius:10px;overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:border-color .15s,background .15s;
+}
+.acomp-card:hover{border-color:#AA2020;background:#3A0808}
+.acomp-photo{
+  width:100%;aspect-ratio:1/1;
+  background:#3D0808;border-bottom:1px solid #5A1010;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;color:#994444;font-size:10px;font-weight:500;
+  cursor:pointer;transition:background .2s,color .2s;position:relative;
+}
+.acomp-photo:hover{background:#4D0A0A;color:var(--gold2)}
+.acomp-photo-icon{font-size:22px;opacity:.6}
+.acomp-photo-id{position:absolute;bottom:3px;right:5px;font-size:8px;opacity:.3;font-family:monospace}
+.acomp-info{padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.acomp-name{font-size:12px;font-weight:600;color:var(--ink)}
+.acomp-sub{font-size:10px;color:var(--muted)}
+.acomp-price{
+  font-size:.95rem;font-weight:700;color:var(--gold2);
+  white-space:nowrap;font-variant-numeric:tabular-nums;
+  flex-shrink:0;
+}
+
+/* ─── BEBIDAS ROW ─── */
+.beb-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;
+}
+.beb-card{
+  background:#2A0505;border:1px solid #5A1010;
+  border-radius:var(--r);overflow:hidden;
+  transition:border-color .2s,transform .2s;
+}
+.beb-card:hover{border-color:#AA2020;transform:translateY(-2px)}
+.beb-photo{
+  width:100%;aspect-ratio:1/1;
+  background:#3D0808;border-bottom:1px solid #5A1010;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;color:#994444;font-size:10px;font-weight:500;
+  cursor:pointer;transition:background .2s,color .2s;position:relative;
+}
+.beb-photo:hover{background:#4D0A0A;color:var(--gold2)}
+.beb-photo-icon{font-size:24px;opacity:.6}
+.beb-photo-id{position:absolute;bottom:3px;right:5px;font-size:8px;opacity:.3;font-family:monospace}
+.beb-info{padding:12px;text-align:center}
+.beb-name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.beb-price{font-size:1rem;font-weight:700;color:var(--gold2)}
+
+/* ─── FOOTER ─── */
+footer{
+  background:linear-gradient(180deg,#880000,#550000);color:#FFB0A0;text-align:center;
+  padding:40px 24px;font-size:13px;line-height:2;
+  border-top:3px solid var(--gold2);
+}
+footer strong{color:var(--gold2)}
+footer small{font-size:11px;opacity:.5;display:block;margin-top:6px}
+
+/* ─── PHOTO PLACEHOLDER ─── */
+.photo-slot{
+  width:100%;border-radius:var(--r);
+  background:#3A0808;
+  border:2px dashed #882020;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;color:#CC6060;font-size:13px;font-weight:500;
+  margin-bottom:16px;padding:28px 16px;text-align:center;
+  cursor:pointer;transition:border-color .2s,background .2s;
+  position:relative;overflow:hidden;
+}
+.photo-slot:hover{border-color:var(--gold2);background:#4A0808;color:var(--gold2)}
+.photo-slot-icon{font-size:36px;opacity:.7}
+.photo-slot-label{font-size:11px;opacity:.6;margin-top:2px}
+/* Horizontal slot (smaller, beside content) */
+.photo-slot-sm{
+  height:140px;border-radius:var(--r);
+  background:#3A0808;border:2px dashed #882020;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;color:#CC6060;font-size:12px;font-weight:500;
+  cursor:pointer;transition:border-color .2s,background .2s;
+}
+.photo-slot-sm:hover{border-color:var(--gold2);background:#4A0808;color:var(--gold2)}
+/* Row: text + photo side by side */
+.sec-with-photo{display:grid;grid-template-columns:1fr 280px;gap:20px;align-items:start;margin-bottom:16px}
+@media(max-width:720px){.sec-with-photo{grid-template-columns:1fr}.photo-slot-side{display:none}}
+@media(max-width:640px){
+  .hero{min-height:280px;padding:48px 20px 40px}
+  .hero-logo{font-size:3rem}
+  .featured-row{grid-template-columns:1fr}
+  main{padding:32px 16px 60px}
+  .sec-title{font-size:1.5rem}
+  .acomp-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-eyebrow">Desamparados · San José · Costa Rica</div>
+  <h1 class="hero-logo">Deli<em>food</em></h1>
+  <p class="hero-tagline">Pasión por el Sabor...</p>
+  <div class="hero-pills">
+    <div class="hero-pill">📱 SINPE Móvil <b>8358-4014</b></div>
+    <div class="hero-pill">📘 <b>Delifood CR</b></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-wrap">
+    <button class="ntab on" onclick="show('all',this)"><span class="ntab-icon">🍽</span>Todo</button>
+    <button class="ntab" onclick="show('pollo',this)"><span class="ntab-icon">🍗</span>Pollo Frito</button>
+    <button class="ntab" onclick="show('trocitos',this)"><span class="ntab-icon">🍖</span>Trocitos</button>
+    <button class="ntab" onclick="show('combos',this)"><span class="ntab-icon">🎁</span>Combos</button>
+    <button class="ntab" onclick="show('delicias',this)"><span class="ntab-icon">🍔</span>Deli-cias</button>
+    <button class="ntab" onclick="show('acomp',this)"><span class="ntab-icon">🍟</span>Acompañamientos</button>
+    <button class="ntab" onclick="show('bebidas',this)"><span class="ntab-icon">🥤</span>Bebidas</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- POLLO FRITO -->
+  <div class="sec" data-s="pollo">
+    <div class="sec-head">
+      <span class="sec-badge">Especialidad</span>
+      <div class="sec-rule"></div>
+      <span class="sec-count">4 opciones</span>
+    </div>
+    <div class="sec-with-photo">
+      <div>
+        <h2 class="sec-title">Pollo Frito</h2>
+        <p class="sec-sub">Crujiente por fuera, jugoso por dentro — nuestro clásico de siempre</p>
+      </div>
+      <div class="photo-slot-sm photo-slot-side">
+        <div class="photo-slot-icon">📷</div>
+        <div>Foto Pollo Frito</div>
+        <div class="photo-slot-label">Reemplaza este bloque con tu imagen</div>
+      </div>
+    </div>
+    <div class="featured-row" id="pollo-feat"></div>
+    <div class="grid" id="pollo-rest"></div>
+  </div>
+
+  <!-- TROCITOS -->
+  <div class="sec" data-s="trocitos">
+    <div class="sec-head">
+      <span class="sec-badge">Para compartir</span>
+      <div class="sec-rule"></div>
+      <span class="sec-count">3 tamaños</span>
+    </div>
+    <div class="sec-with-photo">
+      <div>
+        <h2 class="sec-title">Trocitos</h2>
+        <p class="sec-sub">Bocadillos de pollo perfectos para compartir o disfrutar solo</p>
+      </div>
+      <div class="photo-slot-sm photo-slot-side">
+        <div class="photo-slot-icon">📷</div>
+        <div>Foto Trocitos</div>
+        <div class="photo-slot-label">Reemplaza este bloque con tu imagen</div>
+      </div>
+    </div>
+    <div class="grid" id="g-trocitos"></div>
+  </div>
+
+  <!-- COMBOS -->
+  <div class="sec" data-s="combos">
+    <div class="sec-head">
+      <span class="sec-badge">Todo incluido</span>
+      <div class="sec-rule"></div>
+      <span class="sec-count">5 combos</span>
+    </div>
+    <h2 class="sec-title">Combos</h2>
+    <p class="sec-sub">Plato principal + papas + fresco natural al mejor precio</p>
+    <div class="combo-grid" id="g-combos"></div>
+  </div>
+
+  <!-- DELI-CIAS -->
+  <div class="sec" data-s="delicias">
+    <div class="sec-head">
+      <span class="sec-badge">Nuestra carta</span>
+      <div class="sec-rule"></div>
+      <span class="sec-count" id="cnt-delicias"></span>
+    </div>
+    <div class="sec-with-photo">
+      <div>
+        <h2 class="sec-title">Deli-cias</h2>
+        <p class="sec-sub">Hamburguesas, nachos, burritos, casados y mucho más</p>
+      </div>
+      <div class="photo-slot-sm photo-slot-side">
+        <div class="photo-slot-icon">📷</div>
+        <div>Foto Deli-cias</div>
+        <div class="photo-slot-label">Reemplaza este bloque con tu imagen</div>
+      </div>
+    </div>
+    <div class="featured-row" id="deli-feat"></div>
+    <div class="grid" id="deli-rest"></div>
+  </div>
+
+  <!-- ACOMPAÑAMIENTOS -->
+  <div class="sec" data-s="acomp">
+    <div class="sec-head">
+      <span class="sec-badge">Extras</span>
+      <div class="sec-rule"></div>
+      <span class="sec-count">11 opciones</span>
+    </div>
+    <div class="sec-with-photo">
+      <div>
+        <h2 class="sec-title">Acompañamientos</h2>
+        <p class="sec-sub">Complementa tu pedido con nuestras opciones favoritas</p>
+      </div>
+      <div class="photo-slot-sm photo-slot-side">
+        <div class="photo-slot-icon">📷</div>
+        <div>Foto Acompañamientos</div>
+        <div class="photo-slot-label">Reemplaza este bloque con tu imagen</div>
+      </div>
+    </div>
+    <div class="acomp-grid" id="g-acomp"></div>
+  </div>
+
+  <!-- BEBIDAS -->
+  <div class="sec" data-s="bebidas">
+    <div class="sec-head">
+      <span class="sec-badge">Para tomar</span>
+      <div class="sec-rule"></div>
+      <span class="sec-count">5 bebidas</span>
+    </div>
+    <div class="sec-with-photo">
+      <div>
+        <h2 class="sec-title">Bebidas</h2>
+        <p class="sec-sub">Frescas, calientes y deliciosas</p>
+      </div>
+      <div class="photo-slot-sm photo-slot-side">
+        <div class="photo-slot-icon">📷</div>
+        <div>Foto Bebidas</div>
+        <div class="photo-slot-label">Reemplaza este bloque con tu imagen</div>
+      </div>
+    </div>
+    <div class="beb-grid" id="g-bebidas"></div>
+  </div>
+
+</main>
+
+<footer>
+  <strong>Delifood CR</strong> · Pasión por el Sabor<br>
+  📱 SINPE Móvil <strong>8358-4014</strong>&nbsp;&nbsp;·&nbsp;&nbsp;📘 <strong>Delifood CR</strong>
+  <small>Precios en colones costarricenses ₡ · Sujetos a cambio sin previo aviso</small>
+</footer>
+
+<script>
+function fmt(p){return '₡'+p.toLocaleString('es-CR')}
+
+function slug(s){return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'')}
+
+function photoSlot(id,hint=''){
+  return `<div class="card-photo">
+    <div class="card-photo-icon">📷</div>
+    <div>${hint||'Agregar foto'}</div>
+    <div class="card-photo-id">${id}</div>
+  </div>`;
+}
+
+const POLLO=[
+  {n:"Porción Cuarto y Muslo",s:"Jugosa pieza acompañada al gusto",p:2000},
+  {n:"Porción Ala y Pechuga",s:"Crujiente y sabrosa, ideal para uno",p:2250},
+  {n:"4 Piezas + 2 Acompañamientos",s:null,p:5500,label:"fam"},
+  {n:"8 Piezas + 2 Acompañamientos",s:null,p:9800,label:"fam"},
+];
+
+const TROCITOS=[
+  {n:"6 Trocitos",s:"Perfectos para un antojo",p:2500},
+  {n:"9 Trocitos",s:"Para compartir de a dos",p:3500},
+  {n:"12 Trocitos",s:"Para la mesa completa",p:4500,label:"fam"},
+];
+
+const COMBOS=[
+  {n:"Hamburguesa Pollo",inc:"Papas + Fresco Natural",p:2300},
+  {n:"Hot Dog",inc:"Papas + Fresco Natural",p:2300},
+  {n:"Empanada Carne Arreglada",inc:"Fresco Natural incluido",p:1950},
+  {n:"Salchipapas Pequeña",inc:"Fresco Natural incluido",p:1250},
+  {n:"Empanada Mediana",inc:"Fresco Natural incluido",p:1000},
+];
+
+const DELICIAS=[
+  {n:"Fajitas de Pollo Crispy",s:"Tiras crujientes de pollo a la orden",p:3500,label:"pop"},
+  {n:"Papanacho de Pollo",s:"Nachos XXL con todo encima",p:4800,label:"pop"},
+  {n:"Hamburguesa de Pollo",s:null,p:1500},
+  {n:"Hamburguesa de Res",s:null,p:2000},
+  {n:"Pataburguesa de Pollo",s:"Pollo + Papas",p:2800},
+  {n:"Pataburguesa de Res",s:"Res + Papas",p:2800},
+  {n:"Burrito de Pollo",s:"Pollo + Papas",p:2800},
+  {n:"Burrito de Res",s:"Res + Papas",p:2800},
+  {n:"Hot Dog",s:null,p:2000},
+  {n:"Nacho de Pollo",s:null,p:3800},
+  {n:"Nacho de Res",s:null,p:3800},
+  {n:"Nacho Pequeño de Pollo",s:null,p:2500},
+  {n:"Nacho Pequeño de Res",s:null,p:2500},
+  {n:"Papanacho de Res",s:null,p:4800},
+  {n:"Papas Supremas Delifood",s:"La firma de la casa",p:3800},
+  {n:"Salchipapas",s:null,p:2500},
+  {n:"Casado Delifood",s:"Pescado",p:3500},
+  {n:"Casado Delifood",s:"Pechuga a la plancha",p:3000},
+  {n:"Arroz con Pollo",s:null,p:3800},
+  {n:"Empanada",s:"Pollo / Carne / Queso",p:1000},
+  {n:"Empanada Arreglada",s:null,p:1800},
+  {n:"Ceviche",s:null,p:1200},
+  {n:"Caldosa",s:null,p:1500},
+];
+
+const ACOMP=[
+  {n:"Papas Fritas",s:"Orden Pequeña",p:900},
+  {n:"Papas Fritas",s:"Orden Grande",p:2000},
+  {n:"Papa en Gajo",s:"Orden",p:2500},
+  {n:"Arroz",s:"Orden",p:1000},
+  {n:"Pico de Gallo",s:null,p:700},
+  {n:"Frijolitos",s:null,p:500},
+  {n:"Jalapeño",s:null,p:700},
+  {n:"Bananitos",s:null,p:700},
+  {n:"Platanito Tostado",s:null,p:500},
+  {n:"Tortillitas Tostadas",s:null,p:700},
+  {n:"Salsitas Mixtas 2oz.",s:null,p:500},
+];
+
+const BEBIDAS=[
+  {n:"Café Regular",p:600},
+  {n:"Café de Sabores",p:1000},
+  {n:"Chocolate Caliente",p:1000},
+  {n:"Refresco Natural",p:750},
+  {n:"Granizados",p:750},
+];
+
+function makeCard(item, prefix='item'){
+  const id = prefix+'-'+slug(item.n);
+  const lb=item.label==='fam'?'<span class="card-label label-fam">Familiar</span>':
+           item.label==='pop'?'<span class="card-label label-pop">Popular</span>':'';
+  const d=document.createElement('div');
+  d.className='card';
+  d.innerHTML=`<div class="card-accent"></div>
+    <div class="card-photo" id="${id}">
+      <div class="card-photo-icon">📷</div>
+      <div>Foto del platillo</div>
+      <div class="card-photo-id">${id}</div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">${item.n}</div>
+      <div class="card-sub">${item.s||''}</div>
+      <div class="card-footer">
+        <span class="card-price">${fmt(item.p)}</span>${lb}
+      </div>
+    </div>`;
+  return d;
+}
+
+function makeFeat(item, badge, prefix='feat'){
+  const id = prefix+'-'+slug(item.n);
+  const d=document.createElement('div');
+  d.className='card-feat';
+  d.innerHTML=`
+    <div class="card-feat-photo" id="${id}">
+      <div class="card-feat-photo-icon">📷</div>
+      <div>Foto del platillo</div>
+      <div class="card-feat-photo-id">${id}</div>
+    </div>
+    <div class="card-feat-body">
+      ${badge?`<span class="card-feat-badge">${badge}</span>`:''}
+      <div class="card-feat-name">${item.n}</div>
+      ${item.s?`<div class="card-feat-sub">${item.s}</div>`:''}
+      <div class="card-feat-price">${fmt(item.p)}</div>
+    </div>`;
+  return d;
+}
+
+// POLLO
+const pf=document.getElementById('pollo-feat');
+const pr=document.getElementById('pollo-rest');
+POLLO.forEach((it,i)=>{
+  if(i<2) pf.appendChild(makeFeat(it,i===0?'Más pedido':null,'pollo'));
+  else pr.appendChild(makeCard(it,'pollo'));
+});
+
+// TROCITOS
+const gt=document.getElementById('g-trocitos');
+TROCITOS.forEach(it=>gt.appendChild(makeCard(it,'trocitos')));
+
+// COMBOS (vertical con foto)
+const gc=document.getElementById('g-combos');
+COMBOS.forEach(it=>{
+  const id='combo-'+slug(it.n);
+  const d=document.createElement('div');
+  d.className='combo-card';
+  d.innerHTML=`
+    <div class="combo-photo" id="${id}">
+      <div class="combo-photo-icon">📷</div>
+      <div>Foto del combo</div>
+      <div class="combo-photo-id">${id}</div>
+    </div>
+    <div class="combo-body">
+      <div class="combo-name">${it.n}</div>
+      <div class="combo-inc">${it.inc}</div>
+      <div class="combo-price">${fmt(it.p)}</div>
+    </div>`;
+  gc.appendChild(d);
+});
+
+// DELICIAS
+document.getElementById('cnt-delicias').textContent=DELICIAS.length+' platillos';
+const df=document.getElementById('deli-feat');
+const dr=document.getElementById('deli-rest');
+DELICIAS.forEach((it,i)=>{
+  if(i<2) df.appendChild(makeFeat(it,i===0?'Popular':null,'deli'));
+  else dr.appendChild(makeCard(it,'deli'));
+});
+
+// ACOMP
+const ga=document.getElementById('g-acomp');
+ACOMP.forEach(it=>{
+  const id='acomp-'+slug(it.n)+(it.s?'-'+slug(it.s):'');
+  const d=document.createElement('div');
+  d.className='acomp-card';
+  d.innerHTML=`
+    <div class="acomp-photo" id="${id}">
+      <div class="acomp-photo-icon">📷</div>
+      <div>Foto</div>
+      <div class="acomp-photo-id">${id}</div>
+    </div>
+    <div class="acomp-info">
+      <div>
+        <div class="acomp-name">${it.n}</div>
+        ${it.s?`<div class="acomp-sub">${it.s}</div>`:''}
+      </div>
+      <div class="acomp-price">${fmt(it.p)}</div>
+    </div>`;
+  ga.appendChild(d);
+});
+
+// BEBIDAS
+const gb=document.getElementById('g-bebidas');
+BEBIDAS.forEach(it=>{
+  const id='beb-'+slug(it.n);
+  const d=document.createElement('div');
+  d.className='beb-card';
+  d.innerHTML=`
+    <div class="beb-photo" id="${id}">
+      <div class="beb-photo-icon">📷</div>
+      <div>Foto</div>
+      <div class="beb-photo-id">${id}</div>
+    </div>
+    <div class="beb-info">
+      <div class="beb-name">${it.n}</div>
+      <div class="beb-price">${fmt(it.p)}</div>
+    </div>`;
+  gb.appendChild(d);
+});
+
+function show(key,btn){
+  document.querySelectorAll('.ntab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.sec').forEach(s=>{
+    s.classList.toggle('hidden',key!=='all'&&s.dataset.s!==key);
+  });
+  window.scrollTo({top:document.querySelector('nav').offsetTop-1,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
